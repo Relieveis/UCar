@@ -1,0 +1,49 @@
+﻿@model IList<WarehouseModel>
+@using Honotop.WMS.Models.Warehouses
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "仓库环境";
+}
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row my-bottom">
+                        <div class="col-sm-5">
+                            <label class="col-sm-4 text-right" for="Warehouse">选择仓库环境</label>
+                            <div class="col-sm-8">
+                               <select id="warehouse" class = "form-control">
+                                   <option value="">--仓库环境--</option>
+                                   <option value="华南22仓">华南22仓</option>
+                                   <option value="华南12仓">华南12仓</option>
+                                   <option value="华南02仓">华南02仓</option>
+                                   <option value="温州01仓">温州01仓</option>
+                               </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7 col-md-offset-5">
+                            <button type="button" id="sure" class="btn btn-primary btn-search">
+                                确定
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#sure").on('click', function () {
+        var wms = $("#warehouse").find("option:selected").val();
+        if (wms == "")
+            alert("请选择wms");
+        window.location.href ="@Url.Action("ChangeEnviroment", "Index")" +"?wms=" + wms;
+    })
+</script>
+
+

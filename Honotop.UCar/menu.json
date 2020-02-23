@@ -1,0 +1,46 @@
+{
+  /*
+  菜单
+  MenuName:显示名称；
+  MenuIdentifier:辨识字符串;
+  MenuChild:可为空，无则作为子级，有则为父级。
+  Controller:控制器;
+  Action: 方法；
+  Permission:权限，用逗号分隔；
+  Icon：图标；
+  Url:超链接
+  */
+
+  "MenuRoot": [
+    {
+      "MenuName": "入库单",
+      "MenuIdentifier": "ReceiptOrder",
+      "Controller": "ReceiptOrders",
+      "Action": "Index",
+      "Permission": "",
+      "Icon": "fa fa-dashboard",
+      "Url": "",
+      "MenuChild": null
+    },
+    {
+      "MenuName": "出库单",
+      "MenuIdentifier": "ShipmentOrder",
+      "Controller": "ShipmentOrder",
+      "Action": "Index",
+      "Permission": "",
+      "Icon": "fa fa-dashboard",
+      "Url": "",
+      "MenuChild": null
+    },
+    {
+      "MenuName": "库存查询",
+      "MenuIdentifier": "Inventory",
+      "Controller": "Inventory",
+      "Action": "Index",
+      "Permission": "",
+      "Icon": "fa fa-dashboard",
+      "Url": "",
+      "MenuChild": null
+    }
+  ]
+}

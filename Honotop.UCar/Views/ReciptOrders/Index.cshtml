@@ -1,0 +1,387 @@
+﻿@model ReceiptOrderSearchModel
+@using Honotop.WMS.Models.ReceiptOrders
+@using Honotop.WMS.Utiliy
+@{
+    ViewBag.Title = "入库单列表";
+    ViewBag.MenuIdentifier = "ReceiptOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">货主代码</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">SKU</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.SKU, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">门店名称</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ShopName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">客户单号</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ErpOrderId, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 " for="Warehouse">订单类型</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(m => m.Receipt_Type, SelectedListHelper.GetSelectedItemList(SelectedListType.ReceiptTypeList), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">寄件人</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ShipFromName, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">运单号</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ShipFrom, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">省份</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ShipFromState, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 " for="Warehouse">起始状态</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(m => m.TrailingSysStart, SelectedListHelper.GetSelectedItemList(SelectedListType.InboundStatusList), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">结束状态</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(m => m.TrailingSysEnd, SelectedListHelper.GetSelectedItemList(SelectedListType.InboundStatusList), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">开始时间</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.CreatedStartTime, new { @class = "form-control", @data_type = "date", @type = "date" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">结束时间</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.CreatedEndTime, new { @class = "form-control", @data_type = "date", @type = "date" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">入库单号</label>
+                            <div class="col-sm-9">
+                                @Html.TextAreaFor(m => m.Receipt_Id, new { @class = "form-control", @placeholder = "多个单号查询时，用逗号分隔，如何 123，345，678" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">序列号</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Serialnum, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">电话</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ShipFromPhoneNum, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">ERP单号</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.ErpOrderNum, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7 col-md-offset-5">
+                            <button type="button" id="search" class="btn btn-primary btn-search">
+                                <i class="fa fa-search"></i>
+                                查询
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div style="white-space:nowrap;overflow:scroll;-webkit-backface-visibility:hidden;-webkit-overflow-scrolling:touch;">
+                        <table id="OrdersTable"></table>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $('#OrdersTable').bootstrapTable({
+                                method: 'post',
+                                striped: true,
+                                pagination: true,
+                                queryParams: InqueryParams,
+                                sidePagination: 'server',
+                                queryParamsType: 'limit',
+                                pageNumber: 1,
+                                pageSize: 10,
+                                pageList: [10, 25, 50, 100],
+                                locale: 'zh-CN',
+                                columns:
+                                    [
+                                        {
+                                            field: 'INTERNAL_RECEIPT_NUM',
+                                            title: '',
+                                            events: operateEvents,
+                                            formatter: '<input type="button" name="view_order" class="btn btn-primary" value="明细"/>'
+
+                                        },
+                                        {
+                                            field: 'INTERNAL_RECEIPT_NUM',
+                                            title: '内部号'
+                                        },
+                                        {
+                                            field: 'RECEIPT_ID',
+                                            title: '入库单号',
+                                            width: 150,
+                                        }, {
+                                            field: 'RECEIPT_TYPE',
+                                            title: '入库类型'
+                                        }, {
+                                            field: 'COMPANY',
+                                            title: '货主代码'
+                                        }, {
+                                            field: 'ERP_ORDER_ID',
+                                            title: '客户单号'
+                                        }, {
+                                            field: 'USER_DEF2',
+                                            title: 'ERP订单号'
+                                        }, {
+                                            field: 'USER_DEF3',
+                                            title: '销售渠道'
+                                        }, {
+                                            field: 'TOTAL_LINES',
+                                            title: '订单行数'
+                                        }, {
+                                            field: 'TOTAL_QTY',
+                                            title: '商品总数'
+                                        }, {
+                                            field: 'LEADING_STS',
+                                            title: '主状态'
+                                        }, {
+                                            field: 'TRAILING_STS',
+                                            title: '尾状态'
+                                        }, {
+                                            field: 'CREATE_DATE_TIME',
+                                            title: '创建时间',
+                                            formatter: TimeFormatter
+                                        }, {
+                                            field: 'ACTUAL_ARRIVE_DATE',
+                                            title: '签收日期',
+                                            formatter: TimeFormatter
+                                        }, {
+                                            field: 'CLOSE_DATE',
+                                            title: '关闭时间',
+                                            formatter: TimeFormatter
+                                        }, {
+                                            field: 'SHIP_FROM_NAME',
+                                            title: '寄件人'
+                                        }, {
+                                            field: 'SHIP_FROM_PHONE_NUM',
+                                            title: '电话'
+                                        }, {
+                                            field: 'SHIP_FROM',
+                                            title: '运单号'
+                                        }, {
+                                            field: 'SHIP_FROM_STATE',
+                                            title: '省份'
+                                        }, {
+                                            field: 'SHIP_FROM_ADDRESS1',
+                                            title: '寄件地址'
+                                        }, {
+                                            field: 'USER_DEF5',
+                                            title: '门店编码'
+                                        }, {
+                                            field: 'USER_DEF4',
+                                            title: '门店名称'
+                                        }
+                                    ]
+                            });
+                        });
+
+                        function InqueryParams(params) {
+                            var temp = {
+                                pageNumber: params.pageNumber,
+                                pageSize: params.limit,
+                                Company: $("input[name='Company']").val(),
+                                Receipt_Id: $("#Receipt_Id").val(),
+                                Receipt_Type: $("input[name='Receipt_Type']").val(),
+                                Serialnum: $("input[name='Serialnum']").val(),
+                                SKU: $("input[name='SKU']").val(),
+                                CreatedStartTime: $("input[name='CreatedStartTime']").val(),
+                                CreatedEndTime: $("input[name='CreatedEndTime']").val(),
+                                ErpOrderId: $("input[name='ErpOrderId']").val(),
+                                ShipFromName: $("input[name='ShipFromName']").val(),
+                                TrailingSysStart: $("input[name='TrailingSysStart']").val(),
+                                TrailingSysEnd: $("input[name='TrailingSysEnd']").val(),
+                                ShipFromPhoneNum: $("input[name='ShipFromPhoneNum']").val(),
+                                ShipFrom: $("input[name='ShipFrom']").val(),
+                                ShipFromState: $("input[name='ShipFromState']").val(),
+                                ShopName: $("input[name='ShopName']").val(),
+                                ErpOrderNum: $("input[name='ErpOrderNum']").val()
+                            };
+
+                            return temp;
+                        }
+
+
+                        function TimeFormatter(val) {
+                            if (val != null) {
+                                var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                                var hour = date.getHours();
+                                var min = date.getMinutes();
+                                var seconds = date.getSeconds();
+                                var time = date.getFullYear() + "-" + month + "-" + currentDate;
+                                if (hour == "0" || hour == "00") {
+                                    return time;
+                                } else {
+                                    return time + " " + hour + ":" + min + ":" + seconds;
+                                }
+                            }
+                            return "";
+
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="detailModal">
+    <div class="modal-dialog" style="width: 50%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">明细列表——<span id="header"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="content">
+                    <div class="form-horizontal">
+                        <div class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <table id="ProductListTable"></table>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#ProductListTable').bootstrapTable({
+                                                method: 'post',
+                                                striped: true,
+                                                pagination: true,
+                                                queryParams: InqueryParams,
+                                                sidePagination: 'client',
+                                                queryParamsType: 'limit',
+                                                pageNumber: 1,
+                                                pageSize: 10,
+                                                pageList: [15, 25, 50, 100],
+                                                columns:
+                                                    [
+                                                        {
+                                                            field: 'INTERNAL_RECEIPT_LINE_NUM',
+                                                            title: '内部号',
+                                                            width: 80
+                                                        }
+                                                        , {
+                                                            field: 'ITEM',
+                                                            title: '货品',
+                                                            width: 150
+                                                        }, {
+                                                            field: 'ITEM_DESC',
+                                                            title: '货品名称',
+                                                            width: 180
+                                                        }, {
+                                                            field: 'TOTAL_QTY',
+                                                            title: '应收数量',
+                                                            width: 80
+                                                        }, {
+                                                            field: 'OPEN_QTY',
+                                                            title: '未收数量',
+                                                            width: 80
+                                                        }, {
+                                                            field: 'QUANTITY_UM',
+                                                            title: '单位',
+                                                            width: 80
+                                                        }, {
+                                                            field: 'ATTRIBUTE3',
+                                                            title: '销售渠道',
+                                                            width: 80
+                                                        }
+                                                    ]
+                                            });
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    window.operateEvents = {
+        'click input[name="view_order"]': function (e, value, row, index) {
+            var orderId = value;
+            var receiptId = row.RECEIPT_ID;
+            var company = row.COMPANY;
+            $('#header').html(company + '|' + receiptId);
+            $('#ProductListTable').bootstrapTable('refresh', { url: '@Url.Action("OrderDetailListJson", "ReciptOrders")' + '?orderId=' + orderId, pageNumber: 1 });
+            $("#detailModal").modal();
+        },
+    }
+
+    $(document).ready(function () {
+        $('#search').on('click', function () {
+            $('#OrdersTable').bootstrapTable('refresh', { url: '@Url.Action("OrderList", "ReciptOrders")', pageNumber: 1 });
+        });
+    });
+  
+</script>
+

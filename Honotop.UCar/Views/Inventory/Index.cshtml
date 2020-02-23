@@ -1,0 +1,276 @@
+﻿@model InventorySearchModel
+@using Honotop.WMS.Models.Inventory
+@using Honotop.WMS.Utiliy
+@{
+    ViewBag.Title = "库存列表";
+    ViewBag.MenuIdentifier = "Inventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="form-horizontal">
+        <div class="panel-group">
+            <div class="panel panel-default panel-search">
+                <div class="panel-body">
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">渠道</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(m => m.Channel, SelectedListHelper.GetSelectedItemList(SelectedListType.InventoryChannelList), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">货主</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">货品</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Barcode, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">名称</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 " for="Warehouse">起始库位</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.StartLocation, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">结束库位</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.EndLocation, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">状态</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(m => m.Status, SelectedListHelper.GetSelectedItemList(SelectedListType.InventoryStatusList), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">区域</label>
+                            <div class="col-sm-9">
+                                @Html.DropDownListFor(m => m.Zone, SelectedListHelper.GetSelectedItemList(SelectedListType.ZoneList), new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 " for="Warehouse">LPN</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.LPN, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">属性1</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Attribute1, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">属性2</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Attribute2, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">品牌</label>
+                            <div class="col-sm-9">
+                                @Html.TextBoxFor(m => m.Brand, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-bottom">
+                        <div class="col-sm-3">
+                            <label class="col-sm-3 text-right" for="Warehouse">不包含空库位</label>
+                            <div class="col-sm-9">
+                                @Html.CheckBoxFor(m => m.IsNotNullLoction, new { })
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="row">
+                        <div class="col-md-7 col-md-offset-5">
+                            <button type="button" id="search" class="btn btn-primary btn-search">
+                                <i class="fa fa-search"></i>
+                                查询
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div style="white-space:nowrap;overflow:scroll;-webkit-backface-visibility:hidden;-webkit-overflow-scrolling:touch;">
+                        <table id="OrdersTable"></table>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            $('#OrdersTable').bootstrapTable({
+                                method: 'post',
+                                striped: true,
+                                pagination: true,
+                                queryParams: InqueryParams,
+                                sidePagination: 'server',
+                                queryParamsType: 'limit',
+                                pageNumber: 1,
+                                pageSize: 10,
+                                pageList: [10, 25, 50, 100],
+                                locale: 'zh-CN',
+                                columns:
+                                    [
+                                        //{
+                                        //    field: 'INTERNAL_LOCATION_INV',
+                                        //    title: '',
+                                        //    events: operateEvents,
+                                        //    formatter: '<input type="button" name="view_order" class="btn btn-primary" value="明细"/>'
+
+                                        //},
+                                        {
+                                            field: 'INTERNAL_LOCATION_INV',
+                                            title: '主键'
+                                        },
+                                        {
+                                            field: 'WAREHOUSE',
+                                            title: '仓库'
+                                        }, {
+                                            field: 'COMPANY',
+                                            title: '货主'
+                                        }, {
+                                            field: 'ITEM',
+                                            title: '货品'
+                                        }, {
+                                            field: 'ITEM_DESC',
+                                            title: '名称'
+                                        }, {
+                                            field: 'LOCATION',
+                                            title: '库位'
+                                        }, {
+                                            field: 'ZONE',
+                                            title: '区域'
+                                        }, {
+                                            field: 'ON_HAND_QTY',
+                                            title: '在库数量'
+                                        }, {
+                                            field: 'IN_TRANSIT_QTY',
+                                            title: '移入数量'
+                                        }, {
+                                            field: 'ALLOCATED_QTY',
+                                            title: '分配数量'
+                                        }, {
+                                            field: 'INVENTORY_STS',
+                                            title: '状态'
+                                        }, {
+                                            field: 'ATTRIBUTE_NUM',
+                                            title: '属性号'
+                                        }, {
+                                            field: 'ATTRIBUTE3',
+                                            title: '销售渠道'
+                                        }, {
+                                            field: 'ATTRIBUTE1',
+                                            title: '生产时间'
+                                        }, {
+                                            field: 'ATTRIBUTE2',
+                                            title: '失效日期'
+                                        }, {
+                                            field: 'LPN',
+                                            title: '托盘号'
+                                        }, {
+                                            field: 'ATTRIBUTE4',
+                                            title: '批次号'
+                                        }, {
+                                            field: 'ATTRIBUTE5',
+                                            title: '收货日期'
+                                        }, {
+                                            field: 'BRAND',
+                                            title: '品牌'
+                                        }
+                                    ]
+                            });
+                        });
+
+                        function InqueryParams(params) {
+                            var temp = {
+                                pageNumber: params.pageNumber,
+                                pageSize: params.limit,
+                                Company: $("input[name='Company']").val(),
+                                Channel: $("#Channel").val(),
+                                StartLocation: $("input[name='StartLocation']").val(),
+                                Barcode: $("input[name='Barcode']").val(),
+                                Name: $("input[name='Name']").val(),
+                                Status: $("input[name='Status']").val(),
+                                Zone: $("input[name='Zone']").val(),
+                                EndLocation: $("input[name='EndLocation']").val(),
+                                LPN: $("input[name='LPN']").val(),
+                                Attribute1: $("input[name='Attribute1']").val(),
+                                Attribute2: $("input[name='Attribute2']").val(),
+                                Brand: $("input[name='Brand']").val(),
+                                IsNotNullLoction: $("input[name='IsNotNullLoction']").prop("checked")
+                            };
+
+                            return temp;
+                        }
+
+
+                        function TimeFormatter(val) {
+                            if (val != null) {
+                                var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+                                var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+                                var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+                                var hour = date.getHours();
+                                var min = date.getMinutes();
+                                var seconds = date.getSeconds();
+                                var time = date.getFullYear() + "-" + month + "-" + currentDate;
+                                if (hour == "0" || hour == "00") {
+                                    return time;
+                                } else {
+                                    return time + " " + hour + ":" + min + ":" + seconds;
+                                }
+                            }
+                            return "";
+
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    @*window.operateEvents = {
+        'click input[name="view_order"]': function (e, value, row, index) {
+            var orderId = value;
+            var receiptId = row.RECEIPT_ID;
+            var company = row.COMPANY;
+            $('#header').html(company + '|' + receiptId);
+            $('#ProductListTable').bootstrapTable('refresh', { url: '@Url.Action("OrderDetailListJson", "ReciptOrders")' + '?orderId=' + orderId, pageNumber: 1 });
+            $("#detailModal").modal();
+        },
+    }*@
+
+    $(document).ready(function () {
+        $('#search').on('click', function () {
+            $('#OrdersTable').bootstrapTable('refresh', { url: '@Url.Action("OrderList", "Inventory")', pageNumber: 1 });
+        });
+    });
+
+</script>

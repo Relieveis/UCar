@@ -1,0 +1,52 @@
+﻿@using Honotop.WMS.Utiliy
+@{
+    var menuHelp = new MenuHelper();
+    menuHelp.SerializeFile(@"~/menu.json");
+}
+
+@helper MenuNode(List<MenuMap> menus)
+{
+    /**/
+
+    var Identifier = string.IsNullOrWhiteSpace(ViewBag.MenuIdentifier) ? string.Empty : ViewBag.MenuIdentifier;
+    foreach (var item in menus)
+    {
+        if (!item.IsVisible)
+        {
+            continue;
+        }
+
+
+
+        if (item.MenuChild != null && item.MenuChild.Count() > 0)
+        {
+            var ChildIsActive = item.MenuChild.Where(q => q.MenuIdentifier.Equals(Identifier, StringComparison.CurrentCultureIgnoreCase));
+            bool treeIsAcive = ChildIsActive != null && ChildIsActive.Count() > 0 ? true : false;
+            <li class="treeview @(treeIsAcive?"menu-open":"")">
+                <a href="#">
+                    <i class="@item.Icon"></i> <span>@item.MenuName</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu" style="display: @(treeIsAcive?"block;":"none;")">
+                    @MenuNode(item.MenuChild.ToList())
+                </ul>
+            </li>
+        }
+        else
+        {
+            bool IsActive = item.MenuIdentifier.Equals(Identifier, StringComparison.CurrentCultureIgnoreCase);
+            <li class="@(IsActive?"active":"")"><a href="@Url.Action(item.Action,item.Controller)">@item.MenuName <span class="sr-only"></span></a></li>
+        }
+
+    }
+}
+
+
+<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+    <ul class="nav navbar-nav">
+        @MenuNode(menuHelp.MenuMap)
+    </ul>
+   
+</div>

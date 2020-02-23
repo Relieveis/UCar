@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout =null;
+    ViewBag.Title = "查看入库单明细";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title">明细列表</h4>
+</div>
+<div class="modal-body">
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table id="ProductListTable"></table>
+                        <script>
+                            $(document).ready(function () {
+                                $('#ProductListTable').bootstrapTable({
+                                    url: '@Url.Action("OrderDetailListJson", "ReciptOrders", new { orderId= ViewBag.OrderId })',
+                                    method: 'post',
+                                    striped: true,
+                                    pagination: true,
+                                    queryParams: InqueryParams,
+                                    sidePagination: 'client',
+                                    queryParamsType: 'limit',
+                                    pageNumber: 1,
+                                    pageSize: 10,
+                                    pageList: [15, 25, 50, 100],
+                                    columns:
+                                        [
+                                            {
+                                                field: 'INTERNAL_RECEIPT_LINE_NUM',
+                                                title: '内部号',
+                                                width:80
+                                            }
+                                            , {
+                                                field: 'ITEM',
+                                                title: '货品',
+                                                width: 100
+                                            }, {
+                                                field: 'ITEM_DESC',
+                                                title: '货品名称',
+                                                width: 180
+                                            }, {
+                                                field: 'TOTAL_QTY',
+                                                title: '应收数量',
+                                                width: 80
+                                            }, {
+                                                field: 'OPEN_QTY',
+                                                title: '未收数量',
+                                                width: 80
+                                            }, {
+                                                field: 'QUANTITY_UM',
+                                                title: '单位',
+                                                width: 80
+                                            }, {
+                                                field: 'ATTRIBUTE3',
+                                                title: '销售渠道',
+                                                width: 80
+                                            }
+                                        ]
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+</div>
+
