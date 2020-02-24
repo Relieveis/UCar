@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honotop.UCar.Web", "Honotop.UCar\Honotop.UCar.Web.csproj", "{EFE8903A-07D4-4093-B258-73CF76679E53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honotop.UCar.Data", "Honotop.UCar.Data\Honotop.UCar.Data.csproj", "{E68CCB41-A3B9-446D-B1B8-6396CD5EB740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honotop.UCar.Models", "Honotop.UCar.Models\Honotop.UCar.Models.csproj", "{48336846-7BAC-497A-8712-62970F6DF0CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honotop.UCar.Service", "Honotop.UCar.Service\Honotop.UCar.Service.csproj", "{DDC36232-2C52-4276-A1F2-C6BAF21EF406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honotop.UCar.Tests", "Honotop.UCar.Tests\Honotop.UCar.Tests.csproj", "{7DA7ED60-98B8-4C54-82F4-E8E92E3589AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Honotop.Utils", "Honotop.Utils\Honotop.Utils.csproj", "{AEB273AF-2730-4110-82DB-5BD80FF77F55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFE8903A-07D4-4093-B258-73CF76679E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE8903A-07D4-4093-B258-73CF76679E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE8903A-07D4-4093-B258-73CF76679E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE8903A-07D4-4093-B258-73CF76679E53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E68CCB41-A3B9-446D-B1B8-6396CD5EB740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E68CCB41-A3B9-446D-B1B8-6396CD5EB740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E68CCB41-A3B9-446D-B1B8-6396CD5EB740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E68CCB41-A3B9-446D-B1B8-6396CD5EB740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48336846-7BAC-497A-8712-62970F6DF0CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48336846-7BAC-497A-8712-62970F6DF0CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48336846-7BAC-497A-8712-62970F6DF0CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48336846-7BAC-497A-8712-62970F6DF0CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC36232-2C52-4276-A1F2-C6BAF21EF406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC36232-2C52-4276-A1F2-C6BAF21EF406}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC36232-2C52-4276-A1F2-C6BAF21EF406}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC36232-2C52-4276-A1F2-C6BAF21EF406}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DA7ED60-98B8-4C54-82F4-E8E92E3589AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DA7ED60-98B8-4C54-82F4-E8E92E3589AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DA7ED60-98B8-4C54-82F4-E8E92E3589AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DA7ED60-98B8-4C54-82F4-E8E92E3589AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEB273AF-2730-4110-82DB-5BD80FF77F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEB273AF-2730-4110-82DB-5BD80FF77F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEB273AF-2730-4110-82DB-5BD80FF77F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEB273AF-2730-4110-82DB-5BD80FF77F55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D98BF4E0-33F9-4613-BF33-C4F0191EC115}
+	EndGlobalSection
+EndGlobal
