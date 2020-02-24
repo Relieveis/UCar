@@ -1,9 +1,8 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using Honotop.WMS.Service.Configs;
-using Honotop.WMS.Service.Inventory;
+using Honotop.UCar.Service.Cache;
+using Honotop.UCar.Service.Customers;
 using Honotop.WMS.Service.ReceiptOrders;
-using Honotop.WMS.Service.ShipmentOrders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +23,9 @@ namespace Honotop.WMS
             var builder = new ContainerBuilder();
 
             builder.RegisterType<ReceiptOrderService>().As<IReceiptOrderService>();
-            builder.RegisterType<ShipmentService>().As<IShipmentService>();
-            builder.RegisterType<InventoryService>().As<IInventoryService>();
-            builder.RegisterType<ConfigService>().As<IConfigService>();
+            builder.RegisterType<CustomerService>().As<ICustomerService>();
+            builder.RegisterType<CacheService>().As<ICacheService>();
+
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());
             var container = builder.Build();

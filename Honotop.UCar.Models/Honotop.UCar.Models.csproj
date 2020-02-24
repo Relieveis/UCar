@@ -41,18 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APIResponseModel.cs" />
     <Compile Include="Configs\ConfigModel.cs" />
-    <Compile Include="Configs\InventoryChannelModel.cs" />
-    <Compile Include="Inventory\InventoryModel.cs" />
-    <Compile Include="Inventory\InventorySearchModel.cs" />
+    <Compile Include="Customers\CustomerRoles.cs" />
+    <Compile Include="Customers\Customer.cs" />
     <Compile Include="PageModel.cs" />
+    <Compile Include="PermissionRecords\PermissionRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceiptOrders\ReceiptOrderDetailModel.cs" />
     <Compile Include="ReceiptOrders\ReceiptOrderModel.cs" />
     <Compile Include="ReceiptOrders\ReceiptOrderSearchModel.cs" />
-    <Compile Include="ShipmentOrders\ShipmentOrderDetailModel.cs" />
-    <Compile Include="ShipmentOrders\ShipmentOrderModel.cs" />
-    <Compile Include="ShipmentOrders\ShipmentOrderSearchModel.cs" />
+    <Compile Include="Weixin\AuthResponseModel.cs" />
+    <Compile Include="Weixin\ResultResponseModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

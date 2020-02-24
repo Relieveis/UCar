@@ -2,7 +2,7 @@
 @using Honotop.WMS.Models.ReceiptOrders
 @using Honotop.WMS.Utiliy
 @{
-    ViewBag.Title = "入库单列表";
+    ViewBag.Title = "订单列表";
     ViewBag.MenuIdentifier = "ReceiptOrders";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -44,7 +44,7 @@
                         <div class="col-sm-3">
                             <label class="col-sm-3 " for="Warehouse">订单类型</label>
                             <div class="col-sm-9">
-                                @Html.DropDownListFor(m => m.Receipt_Type, SelectedListHelper.GetSelectedItemList(SelectedListType.ReceiptTypeList), new { @class = "form-control" })
+                               @* @Html.DropDownListFor(m => m.Receipt_Type, SelectedListHelper.GetSelectedItemList(SelectedListType.ReceiptTypeList), new { @class = "form-control" })*@
                             </div>
                         </div>
 
@@ -72,14 +72,14 @@
                         <div class="col-sm-3">
                             <label class="col-sm-3 " for="Warehouse">起始状态</label>
                             <div class="col-sm-9">
-                                @Html.DropDownListFor(m => m.TrailingSysStart, SelectedListHelper.GetSelectedItemList(SelectedListType.InboundStatusList), new { @class = "form-control" })
+                              @*  @Html.DropDownListFor(m => m.TrailingSysStart, SelectedListHelper.GetSelectedItemList(SelectedListType.InboundStatusList), new { @class = "form-control" })*@
                             </div>
                         </div>
 
                         <div class="col-sm-3">
                             <label class="col-sm-3 text-right" for="Warehouse">结束状态</label>
                             <div class="col-sm-9">
-                                @Html.DropDownListFor(m => m.TrailingSysEnd, SelectedListHelper.GetSelectedItemList(SelectedListType.InboundStatusList), new { @class = "form-control" })
+                             @*   @Html.DropDownListFor(m => m.TrailingSysEnd, SelectedListHelper.GetSelectedItemList(SelectedListType.InboundStatusList), new { @class = "form-control" })*@
                             </div>
                         </div>
 

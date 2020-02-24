@@ -13,29 +13,9 @@
 
   "MenuRoot": [
     {
-      "MenuName": "入库单",
+      "MenuName": "订单管理",
       "MenuIdentifier": "ReceiptOrder",
       "Controller": "ReceiptOrders",
-      "Action": "Index",
-      "Permission": "",
-      "Icon": "fa fa-dashboard",
-      "Url": "",
-      "MenuChild": null
-    },
-    {
-      "MenuName": "出库单",
-      "MenuIdentifier": "ShipmentOrder",
-      "Controller": "ShipmentOrder",
-      "Action": "Index",
-      "Permission": "",
-      "Icon": "fa fa-dashboard",
-      "Url": "",
-      "MenuChild": null
-    },
-    {
-      "MenuName": "库存查询",
-      "MenuIdentifier": "Inventory",
-      "Controller": "Inventory",
       "Action": "Index",
       "Permission": "",
       "Icon": "fa fa-dashboard",

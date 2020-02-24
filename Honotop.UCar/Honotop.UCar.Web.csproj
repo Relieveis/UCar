@@ -225,9 +225,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\IndexController.cs" />
-    <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ReciptOrdersController.cs" />
-    <Compile Include="Controllers\ShipmentOrderController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -253,8 +251,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\ShipmentOrder\Index.cshtml" />
-    <Content Include="Views\Inventory\Index.cshtml" />
     <Content Include="Views\Index\Error.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <None Include="Web.Debug.config">
@@ -276,6 +272,10 @@
     <ProjectReference Include="..\Honotop.UCar.Service\Honotop.UCar.Service.csproj">
       <Project>{DDC36232-2C52-4276-A1F2-C6BAF21EF406}</Project>
       <Name>Honotop.UCar.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Honotop.Utils\Honotop.Utils.csproj">
+      <Project>{AEB273AF-2730-4110-82DB-5BD80FF77F55}</Project>
+      <Name>Honotop.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

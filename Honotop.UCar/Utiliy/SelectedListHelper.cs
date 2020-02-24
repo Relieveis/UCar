@@ -1,5 +1,4 @@
-﻿using Honotop.WMS.Models.Configs;
-using Honotop.WMS.Service.Configs;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,52 +12,53 @@ namespace Honotop.WMS.Utiliy
     {
         public static IList<SelectListItem> GetSelectedItemList(SelectedListType type)
         {
-            var list = new List<InventoryChannelModel>();
-            var configService = DependencyResolver.Current.GetService<IConfigService>();
-            switch (type)
-            {
-                case SelectedListType.InboundStatusList:
-                    list = configService.GetInboundStatusList().ToList();
-                    break;
-                case SelectedListType.CarrierList:
-                    list = configService.GetCarrierList().ToList();
-                    break;
-                case SelectedListType.InventoryChannelList:
-                    list = configService.GetInventoryChannelList().ToList();
-                    break;
-                case SelectedListType.OrderTypeList:
-                    list = configService.GetOrderTypeList().ToList();
-                    break;
-                case SelectedListType.ReceiptTypeList:
-                    list = configService.GetReceiptTypeList().ToList();
-                    break;
-                case SelectedListType.ShipmentProcessTypeList:
-                    list = configService.GetShipmentProcessTypeList().ToList();
-                    break;
-                case SelectedListType.ShipmentStatusList:
-                    list = configService.GetShipmentStatusList().ToList();
-                    break;
-                case SelectedListType.ShipmentTypeList:
-                    list = configService.GetShipmentTypeList().ToList();
-                    break;
-                case SelectedListType.WarehouseList:
-                    list = configService.GetWarehouseList().ToList();
-                    break;
-                case SelectedListType.ZoneList:
-                    list = configService.GetZoneList().ToList();
-                    break;
-                case SelectedListType.InventoryStatusList:
-                    list = configService.GetInventoryStatusList().ToList();
-                    break;
+            return null;
+            //var list = new List<InventoryChannelModel>();
+            //var configService = DependencyResolver.Current.GetService<IConfigService>();
+            //switch (type)
+            //{
+            //    case SelectedListType.InboundStatusList:
+            //        list = configService.GetInboundStatusList().ToList();
+            //        break;
+            //    case SelectedListType.CarrierList:
+            //        list = configService.GetCarrierList().ToList();
+            //        break;
+            //    case SelectedListType.InventoryChannelList:
+            //        list = configService.GetInventoryChannelList().ToList();
+            //        break;
+            //    case SelectedListType.OrderTypeList:
+            //        list = configService.GetOrderTypeList().ToList();
+            //        break;
+            //    case SelectedListType.ReceiptTypeList:
+            //        list = configService.GetReceiptTypeList().ToList();
+            //        break;
+            //    case SelectedListType.ShipmentProcessTypeList:
+            //        list = configService.GetShipmentProcessTypeList().ToList();
+            //        break;
+            //    case SelectedListType.ShipmentStatusList:
+            //        list = configService.GetShipmentStatusList().ToList();
+            //        break;
+            //    case SelectedListType.ShipmentTypeList:
+            //        list = configService.GetShipmentTypeList().ToList();
+            //        break;
+            //    case SelectedListType.WarehouseList:
+            //        list = configService.GetWarehouseList().ToList();
+            //        break;
+            //    case SelectedListType.ZoneList:
+            //        list = configService.GetZoneList().ToList();
+            //        break;
+            //    case SelectedListType.InventoryStatusList:
+            //        list = configService.GetInventoryStatusList().ToList();
+            //        break;
 
-                default:
-                    break;
-            }
+            //    default:
+            //        break;
+            //}
 
-            var selectedLists = new List<SelectListItem>() { new SelectListItem() { Text = "--请选择--", Value = string.Empty } };
-            list?.ForEach(x => { selectedLists.Add(new SelectListItem() { Text = x.Description, Value = x.Identifier }); });
+            //var selectedLists = new List<SelectListItem>() { new SelectListItem() { Text = "--请选择--", Value = string.Empty } };
+            //list?.ForEach(x => { selectedLists.Add(new SelectListItem() { Text = x.Description, Value = x.Identifier }); });
 
-            return selectedLists;
+            //return selectedLists;
         }
     }
 
