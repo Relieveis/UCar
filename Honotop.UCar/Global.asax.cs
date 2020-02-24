@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using Honotop.UCar.Service.Cache;
 using Honotop.UCar.Service.Customers;
+using Honotop.UCar.Service.Permissions;
 using Honotop.WMS.Service.ReceiptOrders;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace Honotop.WMS
             builder.RegisterType<ReceiptOrderService>().As<IReceiptOrderService>();
             builder.RegisterType<CustomerService>().As<ICustomerService>();
             builder.RegisterType<CacheService>().As<ICacheService>();
+            builder.RegisterType<PermissionService>().As<IPermissionService>();
 
 
             builder.RegisterControllers(Assembly.GetExecutingAssembly());

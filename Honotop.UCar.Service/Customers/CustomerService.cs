@@ -86,5 +86,17 @@ namespace Honotop.UCar.Service.Customers
         }
 
         #endregion
+
+        #region CustomerRole
+       public CustomerRoles GetCustomerRolesById(int Id)
+        {
+            return null;
+        }
+
+      public  CustomerRoles GetCustomerRolesByName(string systemName)
+        {
+            return null;
+        }
+        #endregion
     }
 }

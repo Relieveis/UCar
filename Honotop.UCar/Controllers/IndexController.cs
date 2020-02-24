@@ -1,8 +1,10 @@
 ﻿using Honotop.UCar.Models;
 using Honotop.UCar.Models.Customers;
+using Honotop.UCar.Models.PermissionRecords;
 using Honotop.UCar.Models.Weixin;
 using Honotop.UCar.Service.Cache;
 using Honotop.UCar.Service.Customers;
+using Honotop.UCar.Service.Permissions;
 using Honotop.Utils;
 using Honotop.WMS.Service.WeChat;
 using System;
@@ -16,17 +18,21 @@ namespace Honotop.WMS.Controllers
     {
         private readonly ICacheService _cacheService;
         private readonly ICustomerService _customerService;
+        private readonly IPermissionService _permissionService;
+
         public IndexController(ICacheService cacheService
-            ,ICustomerService customerService)
+            , ICustomerService customerService
+           , IPermissionService permissionService)
         {
             this._cacheService = cacheService;
             this._customerService = customerService;
+            this._permissionService = permissionService;
         }
 
         public ActionResult Index(string redirectUrl)
-        { 
+        {
             return View();
-        }        
+        }
 
         public ActionResult Error()
         {
@@ -42,11 +48,11 @@ namespace Honotop.WMS.Controllers
                 apiResponseModel.errormsg = "临时登录凭证不能为空";
                 return Json(apiResponseModel);
             }
-           
+
             try
             {
                 var weChatApi = new WeChatAPI();
-                var result = weChatApi.Authorization(code);     
+                var result = weChatApi.Authorization(code);
                 var authModel = JsonUtil.Deserialize<AuthResponseModel>(result);
                 if (string.IsNullOrWhiteSpace(authModel.openid))
                 {
@@ -59,7 +65,7 @@ namespace Honotop.WMS.Controllers
                 var customer = _customerService.GetCustomerByOpenId(authModel.openid);
                 if (customer == null)
                 {
-                     customer = new Customer()
+                    customer = new Customer()
                     {
                         OpenId = authModel.openid,
                         CreatedOnUtc = DateTime.Now,
@@ -95,7 +101,7 @@ namespace Honotop.WMS.Controllers
             var apiResponseModel = new APIResponseModel();
             try
             {
-                var token = Request.QueryString["TOKEN"]?.ToString();
+                var token = Request.Params["TOKEN"]?.ToString();
 
                 var currentCustomer = _cacheService.Get<Customer>(token);
                 if (currentCustomer == null)
@@ -104,9 +110,9 @@ namespace Honotop.WMS.Controllers
                     apiResponseModel.errormsg = "重新登录";
                     return Json(apiResponseModel);
                 }
-                apiResponseModel.errorcode = "0";
-                apiResponseModel.errormsg = "成功";
-                apiResponseModel.data = currentCustomer;
+                bool canManagerCarOrNot = _permissionService.Authorize(StandardPermissionProvider.ManageCar, currentCustomer);
+                apiResponseModel.errorcode = canManagerCarOrNot ? "0" : "-1";
+                apiResponseModel.errormsg = canManagerCarOrNot ? "成功" : "无权限";
                 return Json(apiResponseModel);
             }
             catch (Exception e)
@@ -115,7 +121,7 @@ namespace Honotop.WMS.Controllers
                 apiResponseModel.errormsg = e.Message;
                 return Json(apiResponseModel);
             }
-          
+
         }
     }
 }

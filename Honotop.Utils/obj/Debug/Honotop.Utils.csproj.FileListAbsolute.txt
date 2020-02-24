@@ -8,3 +8,4 @@ D:\Projects\UCar\Honotop.Utils\bin\Debug\Honotop.Utils.pdb
 D:\Projects\UCar\Honotop.Utils\obj\Debug\Honotop.Utils.csproj.CoreCompileInputs.cache
 D:\Projects\UCar\Honotop.Utils\obj\Debug\Honotop.Utils.dll
 D:\Projects\UCar\Honotop.Utils\obj\Debug\Honotop.Utils.pdb
+D:\MyWork\二叠纪\Ucar\Honotop.Utils\obj\Debug\Honotop.Utils.csprojAssemblyReference.cache

@@ -18,5 +18,11 @@ namespace Honotop.UCar.Service.Customers
         void InsertCustomer(Customer customer);
 
         void UpdateCustomer(Customer customer);
+
+        #region CustomerRole
+        CustomerRoles GetCustomerRolesById(int Id);
+
+        CustomerRoles GetCustomerRolesByName(string systemName);
+        #endregion
     }
 }
