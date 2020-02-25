@@ -1,6 +1,6 @@
 {
   /*
-  菜单
+  菜单 a
   MenuName:显示名称；
   MenuIdentifier:辨识字符串;
   MenuChild:可为空，无则作为子级，有则为父级。
